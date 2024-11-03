@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 
-class SlidingImage extends StatefulWidget {
+class SlidingBottomImage extends StatefulWidget {
   final String imagePath;
   final double? width;
 
-  const SlidingImage({Key? key, required this.imagePath, this.width})
+  const SlidingBottomImage({Key? key, required this.imagePath, this.width})
       : super(key: key);
 
   @override
-  _SlidingImageState createState() => _SlidingImageState();
+  _SlidingBottomImageState createState() => _SlidingBottomImageState();
 }
 
-class _SlidingImageState extends State<SlidingImage>
+class _SlidingBottomImageState extends State<SlidingBottomImage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _initialAnimation;
   late Animation<double> _floatingAnimation;
   late Animation<double> _rotationAnimation;
-  bool initAnimation = true;
 
   @override
   void initState() {
@@ -26,7 +25,7 @@ class _SlidingImageState extends State<SlidingImage>
       vsync: this,
     );
 
-    // Animação inicial: de fora da tela à direita até o centro
+    // Animação inicial: de fora da tela abaixo até o centro
     _initialAnimation = Tween<double>(begin: 1.5, end: 0.0).animate(
       CurvedAnimation(
         parent: _controller,
@@ -43,7 +42,7 @@ class _SlidingImageState extends State<SlidingImage>
     );
 
     // Animação de rotação
-    _rotationAnimation = Tween<double>(begin: -0.10, end: 0.90).animate(
+    _rotationAnimation = Tween<double>(begin: -0.10, end: 0.10).animate(
       CurvedAnimation(
         parent: _controller,
         curve: Curves.easeInOut,
@@ -54,7 +53,6 @@ class _SlidingImageState extends State<SlidingImage>
     _controller.forward().then((_) {
       // A partir do final da animação inicial, repetir a animação flutuante e de rotação indefinidamente
       _controller.repeat(reverse: true);
-      initAnimation = false;
     });
     super.initState();
   }
@@ -71,13 +69,13 @@ class _SlidingImageState extends State<SlidingImage>
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        double offsetX = MediaQuery.of(context).size.width *
-            _initialAnimation.value; // Posição X inicial
+        double offsetY = MediaQuery.of(context).size.height *
+            _initialAnimation.value; // Posição Y inicial
         double floatY = _floatingAnimation.value; // Movimento flutuante
         double rotation = _rotationAnimation.value; // Rotação
 
         return Transform.translate(
-          offset: Offset(offsetX, floatY),
+          offset: Offset(0.0, offsetY + floatY), // Mova no eixo Y
           child: Transform.rotate(
             angle: rotation,
             child: child,

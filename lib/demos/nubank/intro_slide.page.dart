@@ -2,6 +2,8 @@ import 'package:app_portifolio/demos/c6-bank/widgets/slidingImage.animation.dart
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
+import 'widgets/slidingImage.animation.dart';
+
 // by Italo Rodri. Dev 2024
 
 /// Classe para dados dos itens do LiquidSwipe
@@ -35,39 +37,39 @@ class _IntroSlideNubankPageState extends State<IntroSlideNubankPage> {
 
   final List<ItemData> data = [
     ItemData(
-        color: Colors.black,
+        color: const Color.fromARGB(255, 130, 10, 209),
         colorTheme: Colors.white,
-        logo: "logo_c6_bank_white.png",
+        logo: "logo_nu_bank_branco.png",
         text1: "Olá, seja bem-vindo",
-        text2: "ao C6 Bank"),
+        text2: "ao nu bank"),
     ItemData(
         color: Colors.white,
         colorTheme: Colors.black,
-        logo: "logo_c6_bank.png",
+        logo: "logo_nu_bank_roxo.png",
         text1: "Conta digital",
         text2: "completa para você!"),
     ItemData(
-        color: Colors.black,
+        color: const Color.fromARGB(255, 130, 10, 209),
         colorTheme: Colors.white,
-        logo: "logo_c6_bank_white.png",
+        logo: "logo_nu_bank_branco.png",
         text1: "Investir nunca foi tão",
         text2: "simples e acessível"),
     ItemData(
         color: Colors.white,
         colorTheme: Colors.black,
-        logo: "logo_c6_bank.png",
+        logo: "logo_nu_bank_roxo.png",
         text1: "Cashback em todas",
         text2: "as suas compras"),
     ItemData(
-        color: Colors.black,
+        color: const Color.fromARGB(255, 130, 10, 209),
         colorTheme: Colors.white,
-        logo: "logo_c6_bank_white.png",
-        text1: "Cartão de crédito",
+        logo: "logo_nu_bank_branco.png",
+        text1: "Cartão Black",
         text2: "sem anuidade"),
     ItemData(
         color: Colors.white,
         colorTheme: Colors.black,
-        logo: "logo_c6_bank.png",
+        logo: "logo_nu_bank_roxo.png",
         text1: "Abra sua conta",
         text2: "hoje mesmo!")
   ];
@@ -101,7 +103,7 @@ class _IntroSlideNubankPageState extends State<IntroSlideNubankPage> {
             },
             onPageChangeCallback: _pageChangeCallback,
             liquidController: liquidController,
-            waveType: WaveType.circularReveal,
+            waveType: WaveType.liquidReveal,
             slideIconWidget: ValueListenableBuilder(
                 valueListenable: indexPageEvent,
                 builder: (context, index, child) {
@@ -180,50 +182,65 @@ class _IntroSlideNubankPageState extends State<IntroSlideNubankPage> {
   }
 
   Widget buildItem(BuildContext context, ItemData item, int index) {
-    return Container(
-      color: item.color,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          SizedBox(
-              width: double.infinity,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('assets/images/${item.logo}',
-                      width: 200, fit: BoxFit.contain),
-                ],
-              )),
-          ValueListenableBuilder(
-              valueListenable: indexPageEvent,
-              builder: (context, int index, child) {
-                if (index == 4) {
-                  return const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 70.0),
-                      child: SlidingImage(
-                          imagePath: 'assets/images/cartao_rosa.png'));
-                } else {
-                  return Container();
-                }
-              }),
-          Column(
+    return Stack(
+      children: [
+        Container(
+          color: item.color,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(item.text1,
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: "Manrope",
-                      fontWeight: FontWeight.w600,
-                      color: item.colorTheme)),
-              Text(item.text2,
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: "Manrope",
-                      fontWeight: FontWeight.w600,
-                      color: item.colorTheme)),
+              SizedBox(
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/${item.logo}',
+                          width: 200, fit: BoxFit.contain),
+                    ],
+                  )),
+              Column(
+                children: [
+                  Text(item.text1,
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: "Manrope",
+                          fontWeight: FontWeight.w600,
+                          color: item.colorTheme)),
+                  Text(item.text2,
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: "Manrope",
+                          fontWeight: FontWeight.w600,
+                          color: item.colorTheme)),
+                ],
+              ),
             ],
           ),
-        ],
-      ),
+        ),
+        Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: ValueListenableBuilder(
+                valueListenable: indexPageEvent,
+                builder: (context, int index, child) {
+                  if (index == 4) {
+                    return const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 70.0),
+                        child: SlidingBottomImage(
+                            imagePath: 'assets/images/cartao_nu_bank.png',
+                            width: 600));
+                  } else if (index == 0) {
+                    return const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 40.0),
+                        child: SlidingBottomImage(
+                            imagePath: 'assets/images/cartao_mao_nu_bank.png',
+                            width: 600));
+                  } else {
+                    return Container();
+                  }
+                })),
+      ],
     );
   }
 }

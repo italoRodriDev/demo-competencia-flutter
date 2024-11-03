@@ -2,17 +2,17 @@ import 'package:app_portifolio/demos/c6-bank/widgets/slidingImage.animation.dart
 import 'package:app_portifolio/demos/nubank/intro_slide.page.dart';
 import 'package:flutter/material.dart';
 
-class SplashBankPage extends StatefulWidget {
-  const SplashBankPage({super.key});
+class SplashNuBankPage extends StatefulWidget {
+  const SplashNuBankPage({super.key});
 
   @override
-  State<SplashBankPage> createState() => _SplashBankPageState();
+  State<SplashNuBankPage> createState() => _SplashNuBankPageState();
 }
 
-class _SplashBankPageState extends State<SplashBankPage> {
+class _SplashNuBankPageState extends State<SplashNuBankPage> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 10)).then((value) => {
+    Future.delayed(const Duration(seconds: 5)).then((value) => {
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => IntroSlideNubankPage()))
         });
@@ -21,14 +21,14 @@ class _SplashBankPageState extends State<SplashBankPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.black,
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 130, 10, 209),
       body: SafeArea(
           child: Stack(
         children: [
           Center(
-            child:
-                SlidingImage(imagePath: 'assets/images/logo_c6_bank_white.png'),
+            child: Image.asset('assets/images/logo_nu_bank_branco.png',
+                width: 150),
           ),
           Align(
             alignment: Alignment.bottomCenter,
