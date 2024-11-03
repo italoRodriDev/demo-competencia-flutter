@@ -1,5 +1,5 @@
-import 'package:app_portifolio/demos/liquid-swiper/intro_slide.page.dart';
-import 'package:app_portifolio/demos/liquid-swiper/widgets/slidingImage.animation.dart';
+import 'package:app_portifolio/demos/c6-bank/widgets/slidingImage.animation.dart';
+import 'package:app_portifolio/demos/nubank/intro_slide.page.dart';
 import 'package:flutter/material.dart';
 
 class SplashBankPage extends StatefulWidget {
@@ -13,8 +13,8 @@ class _SplashBankPageState extends State<SplashBankPage> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 10)).then((value) => {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => IntroSlidePage()))
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => IntroSlideNubankPage()))
         });
     super.initState();
   }

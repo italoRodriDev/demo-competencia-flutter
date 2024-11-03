@@ -1,4 +1,4 @@
-import 'package:app_portifolio/demos/liquid-swiper/widgets/slidingImage.animation.dart';
+import 'package:app_portifolio/demos/c6-bank/widgets/slidingImage.animation.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
@@ -21,12 +21,12 @@ class ItemData {
 }
 
 /// Página principal do LiquidSwiper
-class IntroSlidePage extends StatefulWidget {
+class IntroSlideC6BankPage extends StatefulWidget {
   @override
-  _IntroSlidePageState createState() => _IntroSlidePageState();
+  _IntroSlideC6BankPageState createState() => _IntroSlideC6BankPageState();
 }
 
-class _IntroSlidePageState extends State<IntroSlidePage> {
+class _IntroSlideC6BankPageState extends State<IntroSlideC6BankPage> {
   int page = 0;
   late LiquidController liquidController;
   late AnimationController _controller;
