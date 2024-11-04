@@ -79,7 +79,8 @@ class _CardTwetterState extends State<CardTwetter> {
                       });
                     },
                     child: Padding(
-                        padding: EdgeInsets.only(left: 5, right: 5, bottom: 5),
+                        padding:
+                            const EdgeInsets.only(left: 5, right: 5, bottom: 5),
                         child: showMoreText == false
                             ? Row(
                                 children: [

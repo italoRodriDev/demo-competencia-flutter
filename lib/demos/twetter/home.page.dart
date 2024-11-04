@@ -1,5 +1,8 @@
 import 'package:app_portifolio/demos/twetter/widgets/card_twetter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_crise/components/avatar.component.dart';
+import 'package:flutter_crise/components/text.component.dart';
+import 'package:flutter_crise/components/button.component.dart';
 
 class HomeTwetterPage extends StatefulWidget {
   const HomeTwetterPage({super.key});
@@ -84,14 +87,146 @@ class _HomeTwetterPageState extends State<HomeTwetterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+          child: SafeArea(
+              child: ListView(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                  height: 200,
+                  color: Color.fromARGB(255, 255, 102, 0),
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const AvatarComponent(
+                                radius: 25,
+                                imageUrl:
+                                    'https://mga-prod.s3.amazonaws.com/public/img/users/cIGCQcX7oCej0HIfMQDTBNb7mhsI0hKeJDsgZPsv.jpg'),
+                            const SizedBox(width: 5),
+                            TextComponent(
+                                value: '@italo_rd25',
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                          ],
+                        ),
+                        TextComponent(
+                            value: 'Nível 4',
+                            fontSize: 22,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                            width: 212,
+                            child: ButtonStylizedComponent(
+                                borderRadius: 16,
+                                label: Row(
+                                  children: [
+                                    TextComponent(
+                                        value: "Nova postagem",
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w700),
+                                    const SizedBox(width: 2),
+                                    Icon(Icons.add, color: Colors.white),
+                                  ],
+                                ),
+                                onPressed: () {}))
+                      ],
+                    ),
+                  )),
+              const SizedBox(height: 10),
+              TextButton(
+                  onPressed: () {},
+                  child: TextComponent(
+                    value: 'Início',
+                    fontSize: 22,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                  )),
+              const SizedBox(height: 10),
+              TextButton(
+                  onPressed: () {},
+                  child: TextComponent(
+                    value: 'Cursos',
+                    fontSize: 22,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                  )),
+              const SizedBox(height: 10),
+              TextButton(
+                  onPressed: () {},
+                  child: TextComponent(
+                    value: 'Game',
+                    fontSize: 22,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                  )),
+              const SizedBox(height: 10),
+              TextButton(
+                  onPressed: () {},
+                  child: TextComponent(
+                    value: 'Sair',
+                    fontSize: 22,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                  )),
+              const SizedBox(height: 10),
+            ],
+          )
+        ],
+      ))),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 255, 102, 0),
+        foregroundColor: Colors.white,
         elevation: 0.8,
+        title: TextComponent(
+          value: 'MeConect RH',
+          fontWeight: FontWeight.w700,
+          fontSize: 20,
+        ),
+        actions: [
+          Padding(
+              padding: EdgeInsets.all(2),
+              child: Row(
+                children: [
+                  TextComponent(
+                      value: '@italo_rd25',
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700),
+                  const SizedBox(width: 5),
+                  const AvatarComponent(
+                      radius: 25,
+                      imageUrl:
+                          'https://mga-prod.s3.amazonaws.com/public/img/users/cIGCQcX7oCej0HIfMQDTBNb7mhsI0hKeJDsgZPsv.jpg')
+                ],
+              ))
+        ],
       ),
       body: SafeArea(
           child: SingleChildScrollView(
               child: Column(
         children: [
+          Padding(
+              padding: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  TextComponent(
+                    value: "Feed de notícias",
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ],
+              )),
+          const Divider(),
           for (var i in data)
             CardTwetter(
                 onLike: () {},
