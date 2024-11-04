@@ -4,44 +4,32 @@ import 'package:flutter_crise/components/avatar.component.dart';
 import 'package:flutter_crise/components/text.component.dart';
 import 'package:flutter_crise/components/carrousel-image.component.dart';
 
-class CardTwetter extends StatefulWidget {
+class CardCommentTwetter extends StatefulWidget {
   String photo;
   String name;
   String nickName;
-  String description;
   int likes;
-  List<String> comments;
-  List<dynamic> images;
-  Function onLike;
-  Function onPressedComments;
-  bool enableClickComment;
-  bool enableClickLike;
-  CardTwetter(
+  String comment;
+  CardCommentTwetter(
       {super.key,
       required this.photo,
       required this.name,
       required this.nickName,
-      required this.description,
       required this.likes,
-      required this.comments,
-      required this.images,
-      required this.onLike,
-      required this.onPressedComments,
-      required this.enableClickComment,
-      required this.enableClickLike});
+      required this.comment});
 
   @override
-  State<CardTwetter> createState() => _CardTwetterState();
+  State<CardCommentTwetter> createState() => _CardCommentTwetterState();
 }
 
-class _CardTwetterState extends State<CardTwetter> {
+class _CardCommentTwetterState extends State<CardCommentTwetter> {
   bool showMoreText = false;
   bool likeCurrentUser = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.only(left: 50, right: 8, bottom: 8, top: 8),
         child: Column(
           children: [
             likeCurrentUser
@@ -91,14 +79,14 @@ class _CardTwetterState extends State<CardTwetter> {
                             ? Row(
                                 children: [
                                   SizedBox(
-                                    width: 340,
+                                    width: 300,
                                     child: RichText(
                                       text: TextSpan(
                                         children: _buildTextSpans(widget
-                                                    .description.length >
+                                                    .comment.length >
                                                 150
-                                            ? '${widget.description.substring(0, 150)}...'
-                                            : widget.description),
+                                            ? '${widget.comment.substring(0, 150)}...'
+                                            : widget.comment),
                                         style: TextStyle(
                                             fontSize: 16,
                                             color: Colors.grey[
@@ -111,11 +99,11 @@ class _CardTwetterState extends State<CardTwetter> {
                             : Row(
                                 children: [
                                   SizedBox(
-                                    width: 340,
+                                    width: 300,
                                     child: RichText(
                                       text: TextSpan(
                                         children:
-                                            _buildTextSpans(widget.description),
+                                            _buildTextSpans(widget.comment),
                                         style: TextStyle(
                                             fontSize: 16,
                                             color: Colors.grey[
@@ -126,10 +114,6 @@ class _CardTwetterState extends State<CardTwetter> {
                                 ],
                               )))),
             Padding(
-                padding: const EdgeInsets.only(left: 55, top: 2),
-                child: CarrouselImageComponent(
-                    imageUrls: widget.images, onPageLongClick: (index) {})),
-            Padding(
                 padding: const EdgeInsets.only(left: 40),
                 child: Row(
                   children: [
@@ -137,27 +121,9 @@ class _CardTwetterState extends State<CardTwetter> {
                       children: [
                         IconButton(
                             onPressed: () {
-                              if (widget.enableClickComment == true) {
-                                widget.onPressedComments();
-                              }
-                            },
-                            icon: Icon(CupertinoIcons.chat_bubble,
-                                color: Colors.grey[500])),
-                        TextComponent(
-                            value: widget.comments.length.toString(),
-                            color: Colors.grey[500]),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              if (widget.enableClickLike == true) {
-                                widget.onLike();
-                                setState(() {
-                                  likeCurrentUser = !likeCurrentUser;
-                                });
-                              }
+                              setState(() {
+                                likeCurrentUser = !likeCurrentUser;
+                              });
                             },
                             icon: likeCurrentUser == false
                                 ? Icon(CupertinoIcons.suit_heart,

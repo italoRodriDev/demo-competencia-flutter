@@ -1,3 +1,4 @@
+import 'package:app_portifolio/demos/twetter/comments.page.dart';
 import 'package:app_portifolio/demos/twetter/widgets/card_twetter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crise/components/avatar.component.dart';
@@ -13,6 +14,21 @@ class HomeTwetterPage extends StatefulWidget {
 
 class _HomeTwetterPageState extends State<HomeTwetterPage> {
   List<dynamic> data = [
+    {
+      "photo":
+          "https://mga-prod.s3.amazonaws.com/public/img/users/cIGCQcX7oCej0HIfMQDTBNb7mhsI0hKeJDsgZPsv.jpg",
+      "name": "Italo R. Santos",
+      "nickName": "italo_rd25",
+      "likes": 16,
+      "comments": ["Top", "Legal"],
+      "description":
+          "Pessoal estou liberando o nosso novo game quiz Recursos Humanos, com 3 vagas em disputa, os melhores candidatos se classificam para próxima etapa onde será realizado um teste prático. #TeamItalo #ProcessoSeletivo #Inclusao #Game",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/meconectarhapp.appspot.com/o/Testes%2Fetapa%201.png?alt=media&token=acdabbbe-f44e-4945-91c4-c935b856fa79",
+        "https://firebasestorage.googleapis.com/v0/b/meconectarhapp.appspot.com/o/Testes%2Fetapa%202.png?alt=media&token=d3eaad81-46d1-4ef9-9807-cbb67ca205fe",
+        "https://firebasestorage.googleapis.com/v0/b/meconectarhapp.appspot.com/o/Testes%2Fetapa%203.png?alt=media&token=ac85f999-bd63-4433-b3e4-dce1578bd371"
+      ]
+    },
     {
       "photo":
           "https://mga-prod.s3.amazonaws.com/public/img/users/cIGCQcX7oCej0HIfMQDTBNb7mhsI0hKeJDsgZPsv.jpg",
@@ -95,10 +111,10 @@ class _HomeTwetterPageState extends State<HomeTwetterPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  height: 200,
-                  color: Color.fromARGB(255, 255, 102, 0),
+                  height: 230,
+                  color: const Color.fromARGB(255, 255, 102, 0),
                   child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -117,9 +133,16 @@ class _HomeTwetterPageState extends State<HomeTwetterPage> {
                                 fontWeight: FontWeight.w700),
                           ],
                         ),
+                        const SizedBox(height: 8),
                         TextComponent(
                             value: 'Nível 4',
                             fontSize: 22,
+                            color: const Color.fromARGB(255, 255, 203, 59),
+                            fontWeight: FontWeight.w700),
+                        const SizedBox(height: 8),
+                        TextComponent(
+                            value: 'Desenvolvedor Mobile',
+                            fontSize: 16,
                             color: Colors.white,
                             fontWeight: FontWeight.w700),
                         const SizedBox(height: 20),
@@ -135,7 +158,7 @@ class _HomeTwetterPageState extends State<HomeTwetterPage> {
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700),
                                     const SizedBox(width: 2),
-                                    Icon(Icons.add, color: Colors.white),
+                                    const Icon(Icons.add, color: Colors.white),
                                   ],
                                 ),
                                 onPressed: () {}))
@@ -155,6 +178,15 @@ class _HomeTwetterPageState extends State<HomeTwetterPage> {
               TextButton(
                   onPressed: () {},
                   child: TextComponent(
+                    value: 'Vagas',
+                    fontSize: 22,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                  )),
+              const SizedBox(height: 10),
+              TextButton(
+                  onPressed: () {},
+                  child: TextComponent(
                     value: 'Cursos',
                     fontSize: 22,
                     color: Colors.black,
@@ -164,7 +196,7 @@ class _HomeTwetterPageState extends State<HomeTwetterPage> {
               TextButton(
                   onPressed: () {},
                   child: TextComponent(
-                    value: 'Game',
+                    value: '#GameQuiz',
                     fontSize: 22,
                     color: Colors.black,
                     fontWeight: FontWeight.w700,
@@ -184,14 +216,9 @@ class _HomeTwetterPageState extends State<HomeTwetterPage> {
         ],
       ))),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 102, 0),
+        backgroundColor: const Color.fromARGB(255, 255, 102, 0),
         foregroundColor: Colors.white,
         elevation: 0.8,
-        title: TextComponent(
-          value: 'MeConect RH',
-          fontWeight: FontWeight.w700,
-          fontSize: 20,
-        ),
         actions: [
           Padding(
               padding: EdgeInsets.all(2),
@@ -216,7 +243,7 @@ class _HomeTwetterPageState extends State<HomeTwetterPage> {
               child: Column(
         children: [
           Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Row(
                 children: [
                   TextComponent(
@@ -229,6 +256,14 @@ class _HomeTwetterPageState extends State<HomeTwetterPage> {
           const Divider(),
           for (var i in data)
             CardTwetter(
+                onPressedComments: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CommentsTwetter(twetter: i)));
+                },
+                enableClickComment: true,
+                enableClickLike: true,
                 onLike: () {},
                 photo: i['photo'],
                 name: i['name'],
